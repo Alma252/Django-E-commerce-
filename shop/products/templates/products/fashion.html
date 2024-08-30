@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+  <html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+      <link rel="stylesheet" href="{% static 'products/css/fashion.css' %}">
+    <div class="main"></div>
+
+  <section class="fashion-trends">
+    <div class="container">
+      <div class="fashion-box">
+        <div class="title-style text-center">
+        </div>
+      </div>
+      <div class="trends-grid">
+        <div class="trending-img">
+          <img src="{% static 'products/images/kendall-jenner-jan-2023-64b6b2795dee7.png' %}" alt="" />
+
+          <div class="overlay"></div>
+        </div>
+        <div class="trending-img">
+            <img src="{% static 'products/images/gigi-hadid-at-max-mara-runway-show-at-mfw-in-milan-09-20-2018-5.jpg' %}" alt="" />
+          <div class="overlay"></div>
+        </div>
+        <div class="trending-img">
+            <img src="{% static 'products/images/3f5f2e89b9c1ed4747cc62ccc664ef8e.jpg' %}" alt="" />
+
+          <div class="overlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container section-2">
+      <div class="shop">
+
+          {% for item in items %}
+              <div class="shop1 box">
+                  <div class="box1-content">
+                      <h2>{{ item.title }}</h2>
+                      <div class="box1-img" style="background-image: url('{% if item.image %}{{ item.image.url }}{% else %}{% static 'products/images/default_image.png' %}{% endif %}');"></div>
+                      <p>{{ item.price }} USD</p>
+                      {% if item.discount_price %}
+                          <p>Discount Price: {{ item.discount_price }} USD</p>
+                      {% endif %}
+                      <div class="button-group">
+                          <p><a href="{{ item.get_absolute_url }}" class="btn btn-view-product">View Product</a></p>
+                          <form method="post" action="{% url 'products:cart_add' item.id %}" class="form-add-to-cart">
+                              {% csrf_token %}
+                              <input type="hidden" name="quantity" value="1">
+                              <button type="submit" class="btn btn-add-to-cart">Add to Cart</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+
+    </section>
+{% endblock %}
+

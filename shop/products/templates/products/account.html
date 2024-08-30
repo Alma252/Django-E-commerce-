@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Account</title>
+        <link rel="stylesheet" href="{% static 'products/css/account.css' %}">
+    </head>
+    <body>
+        <div class="account-container">
+            <h2>Your Account</h2>
+            <div class="account-cards">
+                <div class="card" data-section="orders">
+                    <a href="#">
+                        <img src="{% static 'products/images/order._CB660668735_.png' %}" alt="Your Orders">
+                        <h3>Your Orders</h3>
+                        <p>Track, return, or buy things again.</p>
+                    </a>
+                </div>
+                <div class="card" data-section="payments">
+                    <a href="#">
+                        <img src="{% static 'products/images/payment._CB660668735_.png' %}" alt="Your Payments">
+                        <h3>Your Payments</h3>
+                        <p>Manage payment methods and settings.</p>
+                    </a>
+                </div>
+                <div class="card" data-section="lists">
+                    <a href="{% url 'products:user_lists' %}">
+                        <img src="{% static 'products/images//11_lists._CB654640573_.png' %}" alt="Your Orders">
+                        <h3>Your Lists</h3>
+                        <p>View and edit your lists.</p>
+                    </a>
+                </div>
+                <div class="card" data-section="messages">
+                    <a href="#">
+                        <img src="{% static 'products/images/9_messages._CB654640573_.jpg' %}" alt="Your Orders">
+                        <h3>Your Messages</h3>
+                        <p>Read and respond to your messages.</p>
+                    </a>
+                </div>
+                <div class="card" data-section="reviews">
+                    <a href="#">
+                        <img src="{% static 'products/images/contact_us._CB659962323_.png' %}" alt="Your Orders">
+                        <h3>Costomer Service</h3>
+                        <p>Browse self service options, help articles</p>
+                    </a>
+                </div>
+                <div class="card" data-section="settings">
+                    <a href="#">
+                        <img src="{% static 'products/images/security._CB659600413_.png' %}" alt="Your Orders">
+                        <h3>Login & security </h3>
+                        <p>Edit login, name, and mobile number</p>
+                    </a>
+                </div>
+                <div class="card" data-section="settings">
+                    <a href="#">
+                        <img src="{% static 'products/images/GiftCard_icon_01._CB660349069_.png' %}" alt="Your Orders">
+                        <h3>Gift cards </h3>
+                        <p>View balance or redeem a card</p>
+                    </a>
+                </div>
+
+                <div class="card" data-section="settings">
+                    <a href="#">
+                        <img src="{% static 'products/images/amazon_business_yap_atf._CB588250197_.jpg' %}" alt="Your Orders">
+                        <h3>Your business account </h3>
+                        <p>Sign up with free to save</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+    </html>
+{% endblock %}

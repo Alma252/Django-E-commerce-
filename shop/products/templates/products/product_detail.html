@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'products/css/product_detail.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+
+</head>
+<body>
+
+    <div class="pd-wrap">
+        <div class="container">
+            <div class="heading-section">
+                <h2>Product Details</h2>
+            </div>
+            <div class="row">
+                <!-- Product Images Slider -->
+                <img src="{{ product.image.url }}" style="width: 400px;">
+
+
+                <!-- Product Details -->
+                <div class="col-md-6">
+                    <div class="product-dtl">
+                        <div class="product-info">
+                            <div class="product-name">{{ product.title }}</div>
+                            <div class="reviews-counter">
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="text">1 star</label>
+                                </div>
+                                <span>{{ reviews.count }} Reviews</span>
+                            </div>
+                            <div class="product-price-discount">
+                                <span>${{ product.price }}</span>
+                                {% if product.discount_price %}
+                                <span class="line-through">${{ product.discount_price }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <form action="{% url 'products:cart_add' product.id %}" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <div class="col-md-12 product-count mt-3">
+                                <label for="quantity" class="font-weight-bold">Quantity</label>
+                                <div class="input-group">
+                                    <input type="number" name="quantity" value="1" min="1" max="9" class="form-control text-center qty" style="max-width: 70px;">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3 w-100">Add to Cart</button>
+                        </form>
+                        <!-- بخش افزودن به لیست‌های کاربر -->
+                        <div class="dropdown mt-3">
+                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Add to List
+                            </button>
+                            <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                                <form method="post" action="" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="list_type" value="{{ ListType.WISHLIST }}">
+                                    <button type="submit" name="add_to_list" class="dropdown-item">Wishlist</button>
+                                </form>
+                                <form method="post" action="" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="list_type" value="{{ ListType.GIFT_LIST }}">
+                                    <button type="submit" name="add_to_list" class="dropdown-item">Gift List</button>
+                                </form>
+                                <form method="post" action="" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="list_type" value="{{ ListType.SHOPPING_LIST }}">
+                                    <button type="submit" name="add_to_list" class="dropdown-item">Shopping List</button>
+                                </form>
+                                <form method="post" action="" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="list_type" value="{{ ListType.CUSTOM }}">
+                                    <button type="submit" name="add_to_list" class="dropdown-item">Custom List</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="product-info-tabs mt-5">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews ({{ reviews.count }})</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div  id="description" role="tabpanel" aria-labelledby="description-tab">
+                        {{ product.description }}
+                    </div>
+
+                    <h2>Reviews</h2>
+
+                    <div id="reviews">
+                        {% for review in reviews %}
+                            {% include 'products/review.html' with review=review %}
+                        {% endfor %}
+                    </div>
+
+                    <h4>Add New Review</h4>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ review_form.as_p }}
+                        <button type="submit" name="submit_review" class="btn btn-success">send review</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var replyButtons = document.querySelectorAll('.reply-btn');
+            replyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var reviewId = this.getAttribute('data-id');
+                    var replyForm = document.getElementById('reply-form-' + reviewId);
+                    replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+        });
+    </script>
+    <style>
+        .review {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .review-content {
+            margin-bottom: 10px;
+        }
+
+        .reply-form {
+            margin-top: 10px;
+        }
+
+        .replies {
+            margin-left: 20px;
+            border-left: 2px solid #ddd;
+            padding-left: 10px;
+        }
+
+    </style>
+    <!-- Custom JavaScript -->
+</body>
+</html>
+

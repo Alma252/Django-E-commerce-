@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Your Lists</h2>
+
+    <!-- نمایش لیست‌ها -->
+    <div class="accordion" id="userListsAccordion">
+        {% for list_with_items in lists_with_items %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-{{ list_with_items.user_list.id }}">
+                    <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ list_with_items.user_list.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse-{{ list_with_items.user_list.id }}">
+                        <!-- نمایش نام و نوع لیست -->
+                        {{ list_with_items.user_list.name }} ({{ list_with_items.user_list.get_list_type_display }})
+                    </button>
+                </h2>
+                <div id="collapse-{{ list_with_items.user_list.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading-{{ list_with_items.user_list.id }}" data-bs-parent="#userListsAccordion">
+                    <div class="accordion-body">
+                        {% if list_with_items.items %}
+                            <!-- نمایش محصولات درون لیست -->
+                            <ul class="list-group">
+                                {% for item in list_with_items.items %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>
+                                            <strong>{{ item.product_name }}</strong>
+                                            <!-- نمایش نوع لیست جلوی هر محصول -->
+                                            <small class="text-muted">({{ list_with_items.user_list.get_list_type_display }})</small>
+
+                                            {% if item.quantity %}
+                                                <span class="badge bg-primary rounded-pill">{{ item.quantity }}</span>
+                                            {% endif %}
+                                        </span>
+                                        <span>
+                                            <!-- دکمه‌های ویرایش و حذف محصول با رنگ آبی -->
+                                            <a href="{% url 'products:list_item_update' item.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                            <a href="{% url 'products:list_item_delete' item.id %}" class="btn btn-sm btn-outline-primary">Delete</a>
+                                        </span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No items in this list.</p>
+                        {% endif %}
+                        <!-- دکمه افزودن آیتم جدید با رنگ آبی -->
+                        <a href="{% url 'products:list_item_create' list_with_items.user_list.id %}" class="btn btn-primary mt-2">Add Item</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

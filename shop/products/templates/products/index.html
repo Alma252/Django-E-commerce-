@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'products/css/index.css' %}">
+
+     <div class="main"></div>
+    <div class="shop">
+    {% for category in categories %}
+    <div class="shop1 box">
+        <div class="box1-content">
+            <h2>{{ category.name }}</h2>
+            <div class="box1-img" style="background-image: url('{{ category.image.url }}');"></div>
+            {% if category.name == "Deals in PCs" %}
+                <p><a href="{% url 'products:deals_in_pcs' %}">Visit</a></p>
+            {% elif category.name == "Shop deals in Fashion" %}
+                <p><a href="{% url 'products:fashion' %}">Visit</a></p>
+            {% elif category.name == "Cars" %}
+                <p><a href="{% url 'products:cars' %}">Visit</a></p>
+            {% else %}
+                <p><a href="{{ category.get_absolute_url }}">Visit</a></p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

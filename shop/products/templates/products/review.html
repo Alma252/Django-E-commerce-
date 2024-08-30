@@ -1,0 +1,23 @@
+<div class="review">
+    <div class="review-content">
+        <strong>{{ review.name }}</strong>
+        <p>{{ review.review_text }}</p>
+        <small>ratings: {{ review.rating }} | {{ review.created_at }}</small>
+        <button class="btn btn-link reply-btn" data-id="{{ review.id }}">Reply</button>
+    </div>
+
+    <div class="reply-form" id="reply-form-{{ review.id }}" style="display: none;">
+        <form method="post" action="{% url 'products:product' product.slug %}">
+            {% csrf_token %}
+            <input type="hidden" name="parent" value="{{ review.id }}">
+            {{ review_form.as_p }}
+            <button type="submit" name="submit_review" class="btn btn-primary"> Send Reply</button>
+        </form>
+    </div>
+
+    <div class="replies">
+        {% for reply in review.replies.all %}
+            {% include 'products/review.html' with review=reply %}
+        {% endfor %}
+    </div>
+</div>

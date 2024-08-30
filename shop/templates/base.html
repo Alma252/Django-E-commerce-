@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load static %}
+
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alma Website  | CodingNepal</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+</head>
+<body>
+    <header>
+      <nav class="navbar">
+          <div class="nav-logo">
+              <a href="{% url 'products:products'%}"><img src="{% static 'images/img.png' %}" alt="logo"></a>
+          </div>
+          <div class="address">
+              <a href="#" class="deliver">Deliver</a>
+              <div class="map-icon">
+                  <span class="material-symbols-outlined">location_on</span>
+                  <a href="#" class="location">Iran</a>
+              </div>
+          </div>
+
+          <form method="GET" action="{% url 'products:search_results' %}" class="nav-search">
+                <select class="select-search">
+                    <option>All</option>
+                    <option>All Categories</option>
+                    <option>Amazon Devices</option>
+                    <option value="search-alias=digital-music">Digital Music</option>
+                    <option value="search-alias=electronics-intl-ship">Electronics</option>
+                    <option value="search-alias=fashion-girls-intl-ship">Girls' Fashion</option>
+                    <option value="search-alias=hpc-intl-ship">Health & Household</option>
+                    <option value="search-alias=kitchen-intl-ship">Home & Kitchen</option>
+                    <option value="search-alias=industrial-intl-ship">Industrial & Scientific</option>
+                    <option value="search-alias=digital-text">Kindle Store</option>
+                    <option value="search-alias=luggage-intl-ship">Luggage</option>
+                    <option value="search-alias=fashion-mens-intl-ship">Men's Fashion</option>
+                    <option value="search-alias=movies-tv-intl-ship">Movies & TV</option>
+                    <option value="search-alias=music-intl-ship">Music, CDs & Vinyl</option>
+                    <option value="search-alias=pets-intl-ship">Pet Supplies</option>
+                    <option value="search-alias=instant-video">Prime Video</option>
+                    <option value="search-alias=software-intl-ship">Software</option>
+                    <option value="search-alias=sporting-intl-ship">Sports & Outdoors</option>
+                    <option value="search-alias=tools-intl-ship">Tools & Home Improvement</option>
+                    <option value="search-alias=toys-and-games-intl-ship">Toys & Games</option>
+                    <option value="search-alias=videogames-intl-ship">Video Games</option>
+                    <option value="search-alias=fashion-womens-intl-ship">Women's Fashion</option>
+                </select>
+                <input type="text" name="query" placeholder="Search Amazon" class="search-input">
+                <button type="submit" class="search-icon">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+          </form>
+
+
+
+          <div class="sign-in">
+              <a href="{% url 'products:account_view' %}"><p>Hello, {{ user.username }}</p>
+              <span>Account &amp; Lists</span></a>
+          </div>
+
+          <div class="sign-in">
+              <a href="{% url 'accounts:user_login' %}"><span>Login</span></a>/
+              <a href="{% url 'accounts:user_register' %}"><span>Sign Up</span></a>
+          </div>
+
+
+          <div class="cart">
+              <a class="nav-link active" href="{% url 'products:cart' %}"> {{ cart|length }}</a>
+                  <span class="material-symbols-outlined cart-icon">shopping_cart</span>
+              </a>
+              <p>Cart</p>
+          </div>
+
+          {% if request.user.is_admin %}
+          {% endif %}
+      </nav>
+
+      <div class="banner">
+          <div class="banner-content">
+              <div class="panel">
+                  <span class="material-symbols-outlined">menu</span>
+                  <a href="#">All</a>
+              </div>
+
+              <ul class="links">
+                  <li><a href="#">Today's Deals</a></li>
+                  <li><a href="#">Customer Service</a></li>
+                  <li><a href="#">Registry</a></li>
+                  <li><a href="#">Gift Cards</a></li>
+                  <li><a href="#">Sell</a></li>
+              </ul>
+              <div class="deals">
+                  <a href="#">Shop deals in Electronics</a>
+              </div>
+          </div>
+      </div>
+    </header>
+
+    <main>
+
+        {% block content %} {% endblock %}
+    </main>
+
+     <footer>
+      <a href="#" class="footer-title">
+        Back to top
+      </a>
+      <div class="footer-items">
+        <ul>
+          <h3>Get to Know Us</h3>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Release</a></li>
+          <li><a href="#">Amazon Science</a></li>
+        </ul>
+        <ul>
+          <h3>Connect with Us</h3>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <ul>
+          <h3>Make Money with Us</h3>
+          <li><a href="#">Sell on Amazon</a></li>
+          <li><a href="#">Sell under Amazon Accelerator</a></li>
+          <li><a href="#">Protect and Build Your Brand</a></li>
+          <li><a href="#">Amazon Global Selling</a></li>
+          <li><a href="#">Become an Affiliate</a></li>
+          <li><a href="#">Fulfillment by Amazon</a></li>
+          <li><a href="#">Advertise Your Products</a></li>
+          <li><a href="#">Amazon Pay on Merchants</a></li>
+        </ul>
+        <ul>
+          <h3>Let Us Help You</h3>
+          <li><a href="#">COVID-19 and Amazon</a></li>
+          <li><a href="#">Your Account</a></li>
+          <li><a href="#">Return Centre</a></li>
+          <li><a href="#">100% Purchase Protection</a></li>
+          <li><a href="#">Amazon App Download</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+    </footer>
+     <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

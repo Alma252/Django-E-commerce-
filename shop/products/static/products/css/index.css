@@ -1,0 +1,148 @@
+
+.second-nav {
+  height: 42px;
+  background-color: #222f3d;
+  align-items: center;
+  color: white;
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.second-nav p {
+  display: inline;
+}
+
+.allicon {
+  padding-left: 8px;
+  align-items: center;
+  display: flex;
+  width: 58px;
+  height: 36px;
+}
+
+.list {
+  font-weight: 700;
+  margin: 2px;
+  font-size: 14px;
+}
+
+.panel-ops {
+  width: 70%;
+  font-size: 0.8rem;
+}
+
+.ptag {
+  margin-left: 15px;
+}
+.deals {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.main {
+    background-image: url("/static/products/images/ecommerce.jpg");
+    height: 500px;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
+.msg{
+    font-size: 14px;
+    background-color: #f5f6f6;
+    width: 80%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.msg a {
+    color: #007185;
+    text-decoration: none;
+}
+
+.shop{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: #e3f5fa;
+}
+
+.box{
+    height: 400px;
+    width: 23%;
+    background-color: white;
+    padding: 20px 0px 15px;
+    margin: 8px;
+}
+
+.shop1{
+    font-size: 16px;
+}
+
+.box1-img{
+    height: 300px;
+    background-size: cover;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.box1-content{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.shop1 p a{
+      text-decoration: none;
+      color: #007185;
+      font-size: 15px;
+}
+
+/* استایل برای پنهان کردن بخش‌های مرتبط و نمایش کارت‌های محصولات */
+.shop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.shop .box {
+  width: 23%;
+}
+
+.related-products {
+  display: none; /* پنهان کردن به صورت پیش‌فرض */
+  margin-top: 20px;
+}
+
+.related-products.active {
+  display: flex; /* نمایش وقتی فعال است */
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* استایل کارت‌های محصولات */
+.box1-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box1-img {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  width: 100%;
+}

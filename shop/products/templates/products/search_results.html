@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results for "{{ query }}"</title>
+    <link rel="stylesheet" href="{% static 'products/css/category_detail.css' %}">
+</head>
+<body>
+
+    <h1>Search Results for "{{ query }}"</h1>
+
+    <div class="shop">
+        {% for item in results %}
+        <div class="shop1 box">
+            <div class="box1-content">
+                <h2>{{ item.title }}</h2>
+                <div class="box1-img" style="background-image: url('{% if item.image %}{{ item.image.url }}{% else %}{% static 'products/images/default_image.png' %}{% endif %}');"></div>
+                <p>{{ item.price }} USD</p>
+                {% if item.discount_price %}
+                <p>Discount Price: {{ item.discount_price }} USD</p>
+                {% endif %}
+                <div class="button-group">
+                    <p><a href="{{ item.get_absolute_url }}" class="btn btn-view-product">View Product</a></p>
+                    <form method="post" action="{% url 'products:cart_add' item.id %}" class="form-add-to-cart">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="btn btn-add-to-cart">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No results found for "{{ query }}"</p>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if results.has_previous %}
+        <a href="?query={{ query }}&page={{ results.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% if results.has_next %}
+        <a href="?query={{ query }}&page={{ results.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>
+{% endblock %}

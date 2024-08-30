@@ -1,0 +1,57 @@
+/* cart.css */
+
+/* استایل‌های عمومی برای جدول سبد خرید */
+.table-cart {
+    background-color: #f8f9fa;
+    color: #333;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-cart th, .table-cart td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table-cart th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table-cart td {
+    background-color: #ffffff;
+}
+
+.table-cart tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+.table-cart .remove-btn {
+    color: #dc3545;
+    text-decoration: none;
+}
+
+.table-cart .remove-btn:hover {
+    text-decoration: underline;
+}
+
+/* استایل برای دکمه checkout */
+.btn-checkout {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.btn-checkout:hover {
+    background-color: #0056b3;
+}

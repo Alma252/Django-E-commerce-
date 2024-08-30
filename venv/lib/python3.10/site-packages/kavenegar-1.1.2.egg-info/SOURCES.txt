@@ -1,0 +1,9 @@
+README.md
+kavenegar.py
+setup.cfg
+setup.py
+kavenegar.egg-info/PKG-INFO
+kavenegar.egg-info/SOURCES.txt
+kavenegar.egg-info/dependency_links.txt
+kavenegar.egg-info/requires.txt
+kavenegar.egg-info/top_level.txt

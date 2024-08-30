@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'products/css/cars.css' %}">
+
+<div class="main"></div>
+<section class="container section-2">
+    <div class="shop">
+        {% for item in items %}
+        <div class="ad-box">
+            <img src="{% if item.image %}{{ item.image.url }}{% else %}{% static 'products/images/default_image.png' %}{% endif %}" alt="{{ item.title }}" class="car-image">
+            <div class="text-overlay">
+                <div class="text-left">
+                    <h1>{{ item.title }}</h1>
+                    <p>Starting at <span class="price">{{ item.price }} USD</span></p>
+                </div>
+                <div class="button-right">
+                    <a href="{{ item.get_absolute_url }}" class="explore-button">View Product</a>
+                </div>
+                <div class="button-right">
+                    <form method="post" action="{% url 'products:cart_add' item.id %}" class="form-add-to-cart">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="explore-button">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+// آرایه ای از تصاویر پس‌زمینه
+const backgrounds = [
+    "{% static 'products/images/Add a heading.png' %}",
+    "{% static 'products/images/Untitled design.png' %}",
+];
+
+let currentBackgroundIndex = 0;
+const mainDiv = document.querySelector('.main');
+
+// تابع برای تغییر تصویر پس‌زمینه
+function changeBackground() {
+    mainDiv.style.backgroundImage = `url(${backgrounds[currentBackgroundIndex]})`;
+    currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
+}
+
+// تغییر تصویر هر 5 ثانیه یکبار
+setInterval(changeBackground, 6000);
+
+// شروع تغییر تصویر
+changeBackground();
+</script>
+
+{% endblock %}

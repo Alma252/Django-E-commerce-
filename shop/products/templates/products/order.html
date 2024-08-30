@@ -1,0 +1,189 @@
+{% load crispy_forms_tags %}
+<main>
+        <div class="container wow fadeIn">
+          <h2 class="my-5 h2 text-center">Checkout form</h2>
+          <div class="row">
+            <div class="col-md-8 mb-4">
+              <form method="POST" class="card-body">
+                {% csrf_token %}
+
+                <h3>Shipping address</h3>
+
+                <div class='hideable_shipping_form'>
+
+                  <div class="md-form mb-5">
+                    <input type='text' placeholder='1234 Main St' id='shipping_address' name='shipping_address' class='form-control' />
+
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4">
+                      <label for="country">Country</label>
+                        {{ form.shipping_country }}
+                      <input type='text' placeholder='Your country :)' id='country' name='country' class='form-control' />
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                      <label for="shipping_zip">Zip</label>
+                      <input type='text' placeholder='Zip code/requierd :)' id='shipping_zip' name='shipping_zip' class='form-control' />
+                    </div>
+                  </div>
+
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
+                    <label class="custom-control-label" for="same_billing_address">Billing address is the same as my shipping address</label>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="set_default_shipping" id="set_default_shipping">
+                    <label class="custom-control-label" for="set_default_shipping">Save as default shipping address</label>
+                  </div>
+
+                </div>
+
+                {% if default_shipping_address %}
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" name="use_default_shipping" id="use_default_shipping">
+                  <label class="custom-control-label" for="use_default_shipping">Use default shipping address: {{ default_shipping_address.street_address|truncatechars:10 }}</label>
+                </div>
+                {% endif %}
+
+                <hr>
+
+                <div class="col-50">
+                  <h3>Payment</h3>
+                  <p>Total: {{ order.get_total_price }}</p>
+                  <br><br>
+                  <hr>
+                  <h3>Coupon</h3>
+                  <form action="{% url 'products:apply_coupon' order.id %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Apply">
+                  </form>
+                </div>
+
+                <a href="{% url 'products:order_pay' order.id %}" class="btn btn-primary">Pay</a>
+
+          </form>
+
+
+        </div>
+      </div>
+
+      </div>
+    </div>
+</main>
+
+<style>
+     .row {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap; /* IE10 */
+      flex-wrap: wrap;
+      margin: 0 -16px;
+    }
+
+    .col-25 {
+      -ms-flex: 25%; /* IE10 */
+      flex: 25%;
+    }
+
+    .col-50 {
+      -ms-flex: 50%; /* IE10 */
+      flex: 50%;
+    }
+
+    .col-75 {
+      -ms-flex: 75%; /* IE10 */
+      flex: 75%;
+    }
+
+    .col-25,
+    .col-50,
+    .col-75 {
+      padding: 0 16px;
+    }
+
+    .container {
+      background-color: #f2f2f2;
+      padding: 5px 20px 15px 20px;
+      border: 1px solid lightgrey;
+      border-radius: 3px;
+    }
+
+    input[type=text] {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    label {
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .icon-container {
+      margin-bottom: 20px;
+      padding: 7px 0;
+      font-size: 24px;
+    }
+
+    .btn {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      width: 100%;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    span.price {
+      float: right;
+      color: grey;
+    }
+
+    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+    @media (max-width: 800px) {
+      .row {
+        flex-direction: column-reverse;
+      }
+      .col-25 {
+        margin-bottom: 20px;
+      }
+     }
+</style>
+
+<script>
+var hideable_shipping_form = $('.hideable_shipping_form');
+var hideable_billing_form = $('.hideable_billing_form');
+
+var use_default_shipping = document.querySelector("input[name=use_default_shipping]");
+var use_default_billing = document.querySelector("input[name=use_default_billing]");
+
+use_default_shipping.addEventListener('change', function() {
+  if (this.checked) {
+    hideable_shipping_form.hide();
+  } else {
+    hideable_shipping_form.show();
+  }
+})
+
+use_default_billing.addEventListener('change', function() {
+  if (this.checked) {
+    hideable_billing_form.hide();
+  } else {
+    hideable_billing_form.show();
+  }
+})
+
+</script>
