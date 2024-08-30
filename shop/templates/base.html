@@ -79,6 +79,7 @@
           </div>
 
           {% if request.user.is_admin %}
+            <a class="nav-link active" href="{% url 'products:bucket' %}">Bucket</a>
           {% endif %}
       </nav>
 
