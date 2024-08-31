@@ -36,7 +36,8 @@
 
 # Fashion Page🛍
 ![image](https://github.com/user-attachments/assets/b33549c0-5d65-4aa0-9f8e-24587ea548b1)
-![image](https://github.com/user-attachments/assets/a35926e2-bf2b-4caf-aa65-08419b198774)
+![Screenshot from 2024-08-31 11-23-34](https://github.com/user-attachments/assets/e3378620-2122-4762-931d-3b64bbb0a812)
+
 
 
 # Login Page
