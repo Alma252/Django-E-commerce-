@@ -1,6 +1,6 @@
 # Django-Ecommerce
 ![E-commerce](https://github.com/user-attachments/assets/9e2fcdea-7f12-4318-92c5-1ed296def569)
-# Stack Tech
+# Tech Stack
 + Django
 + Postgres
 + Django REST Framework(DRF)
@@ -30,7 +30,7 @@
 # Your Account
 ![Screenshot from 2024-08-31 10-45-03](https://github.com/user-attachments/assets/55c3a4a6-62de-4cb1-9e54-7f0af4e572c6)
 
-# Cars :)
+# Cars :sunglasses:
 ![image](https://github.com/user-attachments/assets/863d37f5-2b0f-4cc1-9ac2-3a9cc69bf1ca)
 ![image](https://github.com/user-attachments/assets/8277b475-57d9-40ff-b565-bb668e2f2d66)
 
