@@ -53,18 +53,18 @@ class UserRegisterVerifyCodeView(View):
 
 				code_instance.delete()
 				messages.success(request, 'you registered.', 'success')
-				return redirect('home:home')
+				return redirect('products:products')
 			else:
 				messages.error(request, 'this code is wrong', 'danger')
 				return redirect('accounts:verify_code')
-		return redirect('home:home')
+		return redirect('products:products')
 
 
 class UserLogoutView(LoginRequiredMixin, View):
 	def get(self, request):
 		logout(request)
 		messages.success(request, 'you logged out successfully', 'success')
-		return redirect('home:home')
+		return redirect('products:products')
 
 
 class UserLoginView(View):
@@ -83,6 +83,6 @@ class UserLoginView(View):
 			if user is not None:
 				login(request, user)
 				messages.success(request, 'you logged in successfully', 'info')
-				return redirect('home:home')
+				return redirect('products:products')
 			messages.error(request, 'phone or password is wrong', 'warning')
 		return render(request, self.template_name, {'form':form})
