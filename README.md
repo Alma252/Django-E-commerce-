@@ -9,7 +9,7 @@
 
 ## Ecommerce website built with Django 5.0.6
 
-![Screenshot from 2024-08-31 10-25-36](https://github.com/user-attachments/assets/b40dc062-2519-4d57-9037-05fd5dc6fa68)
+![image](https://github.com/user-attachments/assets/afd5cf29-8c08-4485-b4e6-d2c1b5078cb6)
 ![Screenshot from 2024-08-31 10-35-38](https://github.com/user-attachments/assets/b334627e-c887-482f-bedd-bd940e0b6d2b)
 
 # Products
