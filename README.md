@@ -1,4 +1,4 @@
-# Django-Ecommerce
+# Django-Ecommerce 🛒
 ![E-commerce](https://github.com/user-attachments/assets/9e2fcdea-7f12-4318-92c5-1ed296def569)
 # Tech Stack
 + Django
