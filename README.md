@@ -34,6 +34,11 @@
 ![image](https://github.com/user-attachments/assets/863d37f5-2b0f-4cc1-9ac2-3a9cc69bf1ca)
 ![image](https://github.com/user-attachments/assets/8277b475-57d9-40ff-b565-bb668e2f2d66)
 
+# Fashion Page🛍
+![image](https://github.com/user-attachments/assets/b33549c0-5d65-4aa0-9f8e-24587ea548b1)
+![image](https://github.com/user-attachments/assets/a35926e2-bf2b-4caf-aa65-08419b198774)
+
+
 # Login Page
 ![image](https://github.com/user-attachments/assets/03e8292c-fc49-49c8-92a1-69c5174732f5)
 
