@@ -13,9 +13,16 @@
 </head>
 <body>
 
-
     <div class="shop">
 
+        <div>
+            <p>مرتب‌سازی محصولات:</p>
+            <a href="?sort=asc">مرتب‌سازی بر اساس قیمت صعودی</a> |
+            <a href="?sort=desc">مرتب‌سازی بر اساس قیمت نزولی</a>
+        </div>
+
+
+        <!-- لیست محصولات -->
         {% for item in items %}
         <div class="shop1 box">
             <div class="box1-content">
@@ -38,15 +45,17 @@
         {% endfor %}
     </div>
 
+    <!-- صفحه‌بندی -->
     <div class="pagination">
         {% if items.has_previous %}
-        <a href="?page={{ items.previous_page_number }}">Previous</a>
+        <a href="?page={{ items.previous_page_number }}&sort={{ request.GET.sort }}">Previous</a>
         {% endif %}
 
         {% if items.has_next %}
-        <a href="?page={{ items.next_page_number }}">Next</a>
+        <a href="?page={{ items.next_page_number }}&sort={{ request.GET.sort }}">Next</a>
         {% endif %}
     </div>
+
 </body>
 </html>
 {% endblock %}

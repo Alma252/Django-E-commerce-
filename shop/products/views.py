@@ -46,7 +46,7 @@ class Cart:
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
 
-    def add(self, product, quantity):
+    def add(self, product, quantity=1):
         product_id = str(product.id)
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0, 'price': float(product.price)}
@@ -75,24 +75,21 @@ class CartView(View):
         cart = Cart(request)
         return render(request, 'products/cart.html', {'cart': cart})
 
-
 class CartAddView(PermissionRequiredMixin, View):
     permission_required = 'products.add_order'
+
+    def get(self, request, product_id):
+        cart = Cart(request)
+        product = get_object_or_404(Item, id=product_id)
+        cart.add(product, quantity=1)  # برای GET یک محصول اضافه می‌کند
+        return redirect('products:cart')
 
     def post(self, request, product_id):
         cart = Cart(request)
         product = get_object_or_404(Item, id=product_id)
         form = CartAddForm(request.POST)
         if form.is_valid():
-            cart.add(product, form.cleaned_data['quantity'])
-        return redirect('products:cart')
-
-
-class CartRemoveView(View):
-    def get(self, request, product_id):
-        cart = Cart(request)
-        product = get_object_or_404(Item, id=product_id)
-        cart.remove(product)
+            cart.add(product, quantity=form.cleaned_data['quantity'])  # برای POST تعداد دلخواه اضافه می‌شود
         return redirect('products:cart')
 
 
@@ -261,12 +258,20 @@ class RequestRefundView(View):
                 messages.info(self.request, "This order does not exist")
                 return redirect("products:request-refund")
 
-
 class CategoryDetailView(View):
     def get(self, request, category_slug):
         category = get_object_or_404(Category, slug=category_slug)
-        items = Item.objects.filter(category=category, is_active=True)
 
+        # دریافت پارامتر مرتب‌سازی از درخواست
+        sort = request.GET.get('sort', 'asc')  # پیش‌فرض: صعودی
+
+        # مرتب‌سازی کالاها بر اساس پارامتر sort
+        if sort == 'desc':
+            items = Item.objects.filter(category=category, is_active=True).order_by('-price')
+        else:
+            items = Item.objects.filter(category=category, is_active=True).order_by('price')
+
+        # تنظیمات صفحه‌بندی
         paginator = Paginator(items, 10)
         page = request.GET.get('page')
         try:
@@ -277,7 +282,6 @@ class CategoryDetailView(View):
             items = paginator.page(paginator.num_pages)
 
         return render(request, 'products/category_detail.html', {'category': category, 'items': items})
-
 
 class ProductDetailView(View):
     def setup(self, request, *args, **kwargs):
@@ -350,7 +354,7 @@ class SearchResultsView(View):
             results = Item.objects.annotate(
                 search=search_vector,
                 similarity=search_similarity
-            ).filter(Q(search=query) | Q(similarity__gte=0.3)).order_by('-similarity')
+            ).filter(Q(search=query) | Q(similarity__gte=0.1)).order_by('-similarity')
 
             paginator = Paginator(results, 10)
             page = request.GET.get('page')
@@ -506,39 +510,21 @@ class AddProductToListView(View):
             messages.success(request, "Item added to your list.")
         return redirect('products:product', slug=slug)
 
+class CartRemoveView(PermissionRequiredMixin, View):
+    permission_required = 'products.delete_order'
 
-@login_required
-def remove_single_item_from_cart(request, slug):
-    item = get_object_or_404(Item, slug=slug)
-    order_qs = Order.objects.filter(
-        user=request.user,
-        ordered=False)
-    if order_qs.exists():
-        order = order_qs[0]
-        # check if the order item is in the order
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item = OrderItem.objects.filter(
-                item=item,
-                user=request.user,
-                ordered=False
-            )[0]
-            if order_item.quantity > 1:
-                order_item.quantity -= 1
-                order_item.save()
+    def get(self, request, product_id):
+        cart = Cart(request)
+        product = get_object_or_404(Item, id=product_id)
+        if str(product.id) in cart.cart:
+            # اگر تعداد محصول بیشتر از 1 بود، یک عدد کم می‌کند
+            if cart.cart[str(product.id)]['quantity'] > 1:
+                cart.cart[str(product.id)]['quantity'] -= 1
             else:
-                order.items.remove(order_item)
-            messages.info(request, "This item qty was updated.")
-            return redirect("products:cart")
-        else:
-            # add a message saying the user dosent have an order
-            messages.info(request, "Item was not in your cart.")
-            return redirect("products:product", slug=slug)
-    else:
-        # add a message saying the user doesn't have an order
-        messages.info(request, "u don't have an active order.")
-        return redirect("products:product", slug=slug)
-    return redirect("products:product", slug=slug)
-
+                # اگر تعداد به 1 رسید، محصول را از سبد حذف می‌کند
+                cart.remove(product)
+        cart.save()
+        return redirect('products:cart')
 
 def is_valid_form(values):
     valid = True

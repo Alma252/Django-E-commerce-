@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from .views import (
-    CartView, CartAddView, CartRemoveView,
+    CartView, CartAddView,
     OrderDetailView, OrderCreateView, OrderPayView,
     OrderVerifyView, CouponApplyView,
     CategoryDetailView,
@@ -10,7 +10,7 @@ from .views import (
     ReviewDeleteView, UserListsAndItemsView, UserListCreateView,
     UserListUpdateView, UserListDeleteView, account_view, BucketHome,
     ListItemCreateView, ListItemUpdateView, ListItemDeleteView, AddReviewView,
-    remove_single_item_from_cart, deals_in_pcs, fashion, cars, DeleteBucketObject, DownloadBucketObject
+    CartRemoveView, deals_in_pcs, fashion, cars, DeleteBucketObject, DownloadBucketObject
 )
 
 app_name = 'products'
@@ -51,8 +51,7 @@ urlpatterns = [
     path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name='review_delete'),
     path('product/<slug:slug>/add_review/', AddReviewView.as_view(), name='add_review'),
 
-    path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,
-         name='remove-single-item-from-cart'),
+    path('cart/remove_one/<int:product_id>/', CartRemoveView.as_view(), name='cart_remove_one'),
 
     path('account/', account_view, name='account_view'),
     path('deals-in-pcs/', deals_in_pcs, name='deals_in_pcs'),
