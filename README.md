@@ -22,7 +22,8 @@
 ![Screenshot from 2024-08-31 10-42-12](https://github.com/user-attachments/assets/bc03371c-c2ab-4370-ba6b-2dd4c8193589)
 
 # Cart Page
-![Screenshot from 2024-08-31 10-43-06](https://github.com/user-attachments/assets/fa9bc090-0ab2-4409-8af5-ff9a0ee5d428)
+![image](https://github.com/user-attachments/assets/1f72c0fb-c579-4fc6-ad56-797b10274ee9)
+
 
 # Checkout
 ![Screenshot from 2024-08-31 10-44-21](https://github.com/user-attachments/assets/e6b979ec-c40a-4381-be9a-57c605257ac4)
