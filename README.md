@@ -44,5 +44,14 @@
 # Login Page
 ![image](https://github.com/user-attachments/assets/03e8292c-fc49-49c8-92a1-69c5174732f5)
 
+# Installation
+git clone https://github.com/Alma252/Django-E-commerce-
+
+cd Django-Ecommerce
+
+pip install virtualenv
+
+virtualenv env
+
 
 
