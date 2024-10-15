@@ -51,7 +51,7 @@
 
 `pip install virtualenv`
 
-# For Mac/ Linux :linux:
+# For Mac/ Linux 
 `source env/bin/activate`
 
 # For Window
