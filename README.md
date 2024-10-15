@@ -54,13 +54,14 @@
 # For Mac/ Linux 
 `source env/bin/activate`
 
-# For Window
+# For Windows
 `env\Scripts\activate`
 
 install the project dependencies with
 `pip install -r requirements.txt`
 
-`python manage.py makemigrations`
-`python manage.py migrate`
-`python manage.py runserver`
-
+```
+  python manage.py makemigrations
+  python manage.py migrate
+  python manage.py runserver
+```
