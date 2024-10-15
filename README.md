@@ -44,6 +44,9 @@
 # Login Page
 ![image](https://github.com/user-attachments/assets/03e8292c-fc49-49c8-92a1-69c5174732f5)
 
+# Project Summary
+The website displays products. Users can add and remove products to/from their cart while also specifying the quantity of each item. They can then enter their address and proceed with the payment process.
+
 # Installation
 `git clone https://github.com/Alma252/Django-E-commerce-`
 
