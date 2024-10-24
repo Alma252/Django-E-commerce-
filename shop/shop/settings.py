@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_spectacular',
-    'storages',  # تغییر نام این خط از 'django-storages' به 'storages'
+    'storages',
 ]
 
 
