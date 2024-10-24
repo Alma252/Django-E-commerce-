@@ -1,9 +1,9 @@
 amqp==5.0.9
 asgiref==3.5.0
 billiard==3.6.4.0
-boto3==1.21.4
+boto3~=1.35.6
 botocore==1.24.4
-celery==5.2.3
+celery~=5.4.0
 certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.0.4
@@ -11,7 +11,7 @@ click-didyoumean==0.3.0
 click-plugins==1.1.1
 click-repl==0.2.0
 Deprecated==1.2.13
-Django==4.0.3
+Django~=5.0.8
 django-celery-beat==2.2.1
 django-ckeditor==6.2.0
 django-js-asset==2.0.0
@@ -29,9 +29,9 @@ psycopg2==2.9.3
 pyparsing==3.0.7
 python-crontab==2.6.0
 python-dateutil==2.8.2
-pytz==2021.3
+pytz~=2024.1
 redis==4.1.4
-requests==2.27.1
+requests~=2.32.3
 s3transfer==0.5.1
 six==1.16.0
 sqlparse==0.4.2
@@ -39,3 +39,9 @@ urllib3==1.26.8
 vine==5.0.0
 wcwidth==0.2.5
 wrapt==1.14.0
+djangorestframework~=3.15.2
+djangorestframework-simplejwt~=5.3.1
+drf-spectacular~=0.27.2
+python-decouple~=3.8
+utils~=1.0.2
+django-countries~=7.6.1
