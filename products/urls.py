@@ -10,7 +10,7 @@ from .views import (
     ReviewDeleteView, UserListsAndItemsView, UserListCreateView,
     UserListUpdateView, UserListDeleteView, account_view, BucketHome,
     ListItemCreateView, ListItemUpdateView, ListItemDeleteView, AddReviewView,
-    CartRemoveView, deals_in_pcs, fashion, cars, DeleteBucketObject, DownloadBucketObject
+    CartRemoveView, deals_in_pcs, fashion, cars, DeleteBucketObject, DownloadBucketObject, cantact_view
 )
 
 app_name = 'products'
@@ -55,6 +55,8 @@ urlpatterns = [
 
     path('account/', account_view, name='account_view'),
     path('deals-in-pcs/', deals_in_pcs, name='deals_in_pcs'),
+    path('account/contact/', cantact_view, name='contact_view'),
+
     path('fashion/', fashion, name='fashion'),
     path('cars/', cars, name='cars'),
     path('bucket/', include(bucket_urls)),

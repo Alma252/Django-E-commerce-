@@ -623,6 +623,9 @@ class CheckoutView(View):
 def account_view(request):
     return render(request, 'products/account.html')
 
+def cantact_view(request):
+    return render(request,'products/cantact.html')
+
 
 def deals_in_pcs(request):
     category = Category.objects.get(name="Deals in PCs")  # دریافت دسته‌بندی با نام خاص

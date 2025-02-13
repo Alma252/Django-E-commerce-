@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import TemplateView
+
 from .forms import UserRegistrationForm, VerifyCodeForm, UserLoginForm
 import random
 from utils import send_otp_code
@@ -86,3 +88,6 @@ class UserLoginView(View):
 				return redirect('products:products')
 			messages.error(request, 'phone or password is wrong', 'warning')
 		return render(request, self.template_name, {'form':form})
+
+class GalleryView(TemplateView):
+	template_name = "accounts/gallery.html"
